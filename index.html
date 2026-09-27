@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thirunavukkarasu T — DevOps / Infrastructure Engineer</title>
+<meta name="description" content="DevOps / Infrastructure Engineer based in Coimbatore, India. Infrastructure, deployments, Kubernetes, CI/CD and cloud systems for Rubricate, CVAT, sales.usedataclap.com and KubeTrace — currently exploring MLOps.">
+<link rel="canonical" href="https://thirunavukkarasu.in/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Thirunavukkarasu T — DevOps / Infrastructure Engineer">
+<meta property="og:description" content="I build, automate and troubleshoot infrastructure behind real-world applications.">
+<meta property="og:url" content="https://thirunavukkarasu.in/">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23091729'/%3E%3Ctext x='6' y='22' font-family='monospace' font-size='16' fill='%23FFB454'%3E%3E_%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#060F1C;
+  --panel:#0D1F33;
+  --panel-glass:rgba(13,31,51,0.7);
+  --panel-alt:#112A44;
+  --grid:rgba(200,225,245,0.05);
+  --line:rgba(200,225,245,0.13);
+  --line-strong:rgba(200,225,245,0.30);
+  --paper:#E8F1F8;
+  --dim:#8FA6BC;
+  --amber:#FFB454;
+  --teal:#63D9C3;
+  --radius:4px;
+  --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans:'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --maxw:1080px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--paper);
+  font-family:var(--sans);
+  line-height:1.65;
+  background-image:linear-gradient(var(--grid) 1px, transparent 1px),linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:42px 42px;
+  overflow-x:hidden;
+}
+a{color:var(--teal);}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+h1,h2,h3,h4{font-family:var(--sans);font-weight:700;margin:0;}
+.mono{font-family:var(--mono);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;}
+.reveal.in-view{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+  *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;}
+}
+
+/* ---------- NAV ---------- */
+nav.top{position:sticky;top:0;z-index:80;background:rgba(6,15,28,0.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+nav.top .bar{display:flex;align-items:center;justify-content:space-between;padding:15px 0;}
+.brand{font-family:var(--mono);font-size:14px;color:var(--amber);}
+.nav-links{display:flex;gap:20px;font-family:var(--mono);font-size:12.5px;}
+.nav-links a{color:var(--dim);text-decoration:none;padding:4px 2px;border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s;}
+.nav-links a:hover{color:var(--teal);}
+.nav-links a.active{color:var(--teal);border-color:var(--teal);}
+.nav-toggle{display:none;background:none;border:1px solid var(--line-strong);color:var(--paper);font-family:var(--mono);font-size:13px;padding:6px 10px;border-radius:var(--radius);cursor:pointer;}
+@media (max-width:860px){
+  .nav-links{position:fixed;top:52px;left:0;right:0;background:var(--panel);border-bottom:1px solid var(--line);flex-direction:column;gap:0;max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .nav-links.open{max-height:440px;}
+  .nav-links a{padding:14px 24px;border-bottom:1px solid var(--line);border-left:2px solid transparent;}
+  .nav-links a.active{border-left-color:var(--teal);border-bottom-color:var(--line);}
+  .nav-toggle{display:block;}
+}
+
+/* ---------- HERO ---------- */
+.hero{padding:80px 0 60px;position:relative;}
+.corner{position:absolute;width:20px;height:20px;border:1.5px solid var(--line-strong);}
+.corner.tl{top:0;left:24px;border-right:none;border-bottom:none;}
+.corner.tr{top:0;right:24px;border-left:none;border-bottom:none;}
+.hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:44px;align-items:center;}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+.term-line{font-family:var(--mono);font-size:14px;color:var(--teal);margin:0 0 18px;min-height:20px;}
+.term-line .caret{display:inline-block;width:8px;height:16px;background:var(--teal);margin-left:2px;vertical-align:-3px;animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+.hero h1{font-size:clamp(30px,4.6vw,44px);letter-spacing:-0.01em;margin-bottom:6px;}
+.hero .role{font-family:var(--mono);color:var(--amber);font-size:15.5px;margin:0 0 20px;}
+.hero .pitch{max-width:58ch;color:var(--dim);font-size:16px;margin-bottom:26px;}
+.chip-row{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:30px;}
+.chip{font-family:var(--mono);font-size:12px;border:1px solid var(--line-strong);padding:5px 12px 5px 9px;border-radius:var(--radius);color:var(--paper);display:inline-flex;align-items:center;gap:6px;}
+.chip .pulse{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal);animation:pulse 2.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(0.75);}}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;}
+.btn{font-family:var(--mono);font-size:13px;text-decoration:none;padding:11px 18px;border-radius:var(--radius);border:1px solid var(--line-strong);color:var(--paper);transition:border-color .2s,color .2s,transform .2s;}
+.btn:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-1px);}
+.btn.primary{background:var(--amber);border-color:var(--amber);color:#0B0B0B;font-weight:600;}
+.btn.primary:hover{opacity:.9;color:#0B0B0B;}
+
+/* hero infra diagram */
+.hero-diagram{background:var(--panel-glass);border:1px solid var(--line-strong);border-radius:var(--radius);padding:18px;backdrop-filter:blur(6px);}
+.hero-diagram svg{width:100%;height:auto;display:block;}
+.node-box{fill:var(--panel-alt);stroke:var(--line-strong);stroke-width:1;}
+.node-text{fill:var(--paper);font-family:var(--mono);font-size:10.5px;}
+.flow-line{fill:none;stroke:var(--teal);stroke-width:1.4;stroke-dasharray:5 4;opacity:.75;animation:dash 2.6s linear infinite;}
+@keyframes dash{to{stroke-dashoffset:-18;}}
+.node-final{stroke:var(--amber);}
+
+/* system status panel */
+.status-panel{margin-top:18px;background:var(--panel-glass);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;backdrop-filter:blur(6px);}
+.status-title{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.03em;margin-bottom:2px;}
+.status-caption{font-family:var(--mono);font-size:10px;color:var(--dim);opacity:.7;margin-bottom:12px;}
+.status-row{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12.5px;padding:6px 0;border-top:1px solid var(--line);}
+.status-row:first-of-type{border-top:none;}
+.status-row .val{color:var(--teal);display:flex;align-items:center;gap:6px;}
+.status-row .val .pulse{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal);animation:pulse 2.4s ease-in-out infinite;}
+
+/* ---------- SECTION SHELL ---------- */
+section{padding:60px 0;border-top:1px solid var(--line);scroll-margin-top:64px;}
+.section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:34px;}
+.section-num{font-family:var(--mono);color:var(--amber);font-size:13px;}
+.section-head h2{font-size:22px;}
+.section-line{flex:1;height:1px;background:var(--line);}
+.section-sub{color:var(--dim);font-size:14.5px;max-width:62ch;margin:-20px 0 32px;}
+
+/* ---------- JOURNEY ---------- */
+.journey{position:relative;padding-left:28px;}
+.journey::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line);}
+.journey::after{content:"";position:absolute;left:6px;top:6px;width:1px;background:linear-gradient(var(--teal),var(--teal));height:0;transition:height 1.2s ease;}
+.journey.in-view::after{height:calc(100% - 12px);}
+.jstep{position:relative;padding-bottom:34px;}
+.jstep:last-child{padding-bottom:0;}
+.jstep::before{content:"";position:absolute;left:-28px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--line-strong);transition:border-color .4s, box-shadow .4s;}
+.jstep.in-view::before{border-color:var(--teal);box-shadow:0 0 8px rgba(99,217,195,0.5);}
+.jstep .yr{font-family:var(--mono);color:var(--amber);font-size:13px;}
+.jstep .role{font-weight:600;font-size:16px;margin:3px 0 2px;}
+.jstep .desc{color:var(--dim);font-size:14px;}
+
+/* ---------- WHAT I BUILD ---------- */
+.build-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+.build-card{background:var(--bg);padding:24px 20px;transition:background .25s, transform .25s;position:relative;overflow:hidden;}
+.build-card:hover,.build-card:focus-within{background:var(--panel);transform:translateY(-3px);}
+.build-card .ic{font-family:var(--mono);color:var(--amber);font-size:12px;margin-bottom:10px;}
+.build-card h3{font-size:15.5px;margin-bottom:6px;}
+.build-card p{color:var(--dim);font-size:13.5px;margin:0;}
+.build-term{font-family:var(--mono);font-size:11px;color:var(--teal);max-height:0;opacity:0;overflow:hidden;transition:max-height .3s ease, opacity .3s ease, margin .3s ease;margin-top:0;}
+.build-card:hover .build-term,.build-card:focus-within .build-term{max-height:80px;opacity:1;margin-top:12px;}
+.build-term div{margin-bottom:2px;}
+
+/* ---------- PRODUCTION CARDS ---------- */
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.prod-card{border:1px solid var(--line-strong);padding:24px;border-radius:var(--radius);background:var(--panel);transition:border-color .25s,transform .25s,box-shadow .25s;}
+.prod-card:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 10px 30px -14px rgba(99,217,195,0.35);}
+.prod-card .idx{font-family:var(--mono);color:var(--amber);font-size:12px;}
+.prod-card h3{font-size:19px;margin:8px 0 4px;}
+.prod-card .tagline{color:var(--dim);font-size:13.5px;margin-bottom:6px;}
+.prod-card .role-tag{font-family:var(--mono);font-size:11.5px;color:var(--teal);border:1px solid var(--line);padding:3px 8px;border-radius:var(--radius);display:inline-block;margin-bottom:14px;}
+.prod-card .tag-row{margin-bottom:16px;}
+.prod-card .card-links{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;}
+.prod-card .card-links a{text-decoration:none;color:var(--dim);border-bottom:1px dashed var(--line-strong);}
+.prod-card .card-links a:hover{color:var(--teal);border-color:var(--teal);}
+@media (max-width:700px){.prod-grid{grid-template-columns:1fr;}}
+
+/* ---------- CASE STUDIES ---------- */
+.case{border:1px solid var(--line-strong);border-radius:var(--radius);padding:30px 28px;margin-bottom:24px;background:var(--panel);scroll-margin-top:80px;}
+.case:last-child{margin-bottom:0;}
+.case-head{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:22px;border-bottom:1px solid var(--line);padding-bottom:18px;}
+.case-head .idx{font-family:var(--mono);color:var(--amber);font-size:13px;margin-right:12px;}
+.case-head h3{font-size:21px;display:inline;}
+.case-head .tagline{color:var(--dim);font-size:14px;margin-top:4px;}
+.case-link{font-family:var(--mono);font-size:12.5px;text-decoration:none;color:var(--teal);border:1px solid var(--line);padding:6px 10px;border-radius:var(--radius);white-space:nowrap;}
+.case-body{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
+.case-body h4{font-family:var(--mono);font-size:12px;color:var(--amber);text-transform:lowercase;margin:20px 0 8px;}
+.case-body h4:first-child{margin-top:0;}
+.case-body h4::before{content:"// ";color:var(--dim);}
+.case-body p{color:var(--dim);font-size:14.5px;margin:0 0 4px;}
+.case-body ul{margin:0;padding-left:18px;color:var(--dim);font-size:14px;}
+.case-body li{margin-bottom:6px;}
+@media (max-width:760px){.case-body{grid-template-columns:1fr;}}
+
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px;}
+.flow .node{font-family:var(--mono);font-size:12px;border:1px solid var(--line-strong);background:var(--panel-alt);padding:7px 11px;border-radius:var(--radius);color:var(--paper);position:relative;}
+.flow .node[tabindex]{cursor:help;}
+.flow .node[data-tip]:hover::after,.flow .node[data-tip]:focus::after{
+  content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:0;
+  background:#0B2440;border:1px solid var(--line-strong);color:var(--paper);
+  font-size:11px;padding:6px 9px;border-radius:var(--radius);white-space:nowrap;z-index:5;
+}
+.flow .arrow{color:var(--dim);font-family:var(--mono);}
+@media (max-width:520px){
+  .flow{flex-direction:column;align-items:flex-start;}
+  .flow .arrow::before{content:"↓";}
+  .flow .arrow{height:14px;}
+}
+@media (min-width:521px){
+  .flow .arrow::before{content:"→";}
+}
+.tag-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;}
+.tag{font-family:var(--mono);font-size:11.5px;color:var(--paper);border:1px solid var(--line-strong);padding:4px 9px;border-radius:var(--radius);transition:border-color .2s,color .2s;}
+.tag:hover{border-color:var(--teal);color:var(--teal);}
+
+/* ---------- TOOLBOX ---------- */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+.tool-card{background:var(--bg);padding:20px;transition:background .25s;}
+.tool-card:hover{background:var(--panel);}
+.tool-card h3{font-family:var(--mono);font-size:12px;color:var(--amber);margin:0 0 12px;text-transform:lowercase;}
+.tool-card h3::before{content:"// ";color:var(--dim);}
+
+/* ---------- LEARNING ---------- */
+.learn-box{border:1px dashed var(--amber);border-radius:var(--radius);padding:28px 26px;background:rgba(255,180,84,0.04);}
+.learn-badge{font-family:var(--mono);font-size:11px;color:var(--amber);border:1px solid var(--amber);padding:4px 10px;border-radius:var(--radius);display:inline-block;margin-bottom:14px;}
+.learn-box h3{font-size:19px;margin-bottom:10px;}
+.learn-box p{color:var(--dim);font-size:14.5px;max-width:66ch;}
+.split-label{font-family:var(--mono);font-size:12px;color:var(--dim);margin:0 0 14px;}
+.mlops-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px;}
+.mlops-flow .node{font-family:var(--mono);font-size:12px;border:1px solid var(--amber);color:var(--amber);background:rgba(255,180,84,0.06);padding:7px 12px;border-radius:var(--radius);}
+.mlops-flow .arrow{color:var(--amber);opacity:.6;font-family:var(--mono);}
+@media (max-width:560px){
+  .mlops-flow{flex-direction:column;align-items:flex-start;}
+  .mlops-flow .arrow::before{content:"↓";}
+}
+@media (min-width:561px){
+  .mlops-flow .arrow::before{content:"→";}
+}
+
+/* ---------- CONTACT ---------- */
+footer{padding:70px 0 80px;border-top:1px solid var(--line);text-align:center;}
+footer .kicker{font-family:var(--mono);color:var(--teal);font-size:13px;margin-bottom:10px;}
+footer h2{font-size:clamp(24px,4vw,32px);margin-bottom:12px;}
+footer .sub{color:var(--dim);font-size:15px;max-width:46ch;margin:0 auto 30px;}
+.contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;font-family:var(--mono);font-size:13.5px;}
+.contact-links a{color:var(--paper);text-decoration:none;border:1px solid var(--line-strong);padding:10px 18px;border-radius:var(--radius);transition:border-color .2s,color .2s;}
+.contact-links a:hover{border-color:var(--teal);color:var(--teal);}
+.foot-note{margin-top:36px;font-family:var(--mono);font-size:11.5px;color:var(--dim);opacity:.6;}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap bar">
+    <div class="brand">arasu@infra:~$</div>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">menu</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#whoami" data-section="whoami">01 whoami</a>
+      <a href="#journey" data-section="journey">02 journey</a>
+      <a href="#build" data-section="build">03 build</a>
+      <a href="#production" data-section="production">04 production</a>
+      <a href="#case-studies" data-section="case-studies">05 case studies</a>
+      <a href="#toolbox" data-section="toolbox">06 toolbox</a>
+      <a href="#learning" data-section="learning">07 learning</a>
+      <a href="#contact" data-section="contact">08 contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<header class="hero" id="whoami">
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="term-line mono" id="typedLine">&nbsp;</p>
+      <h1>Thirunavukkarasu T</h1>
+      <p class="role">DevOps / Infrastructure Engineer · Coimbatore, Tamil Nadu, India</p>
+      <p class="pitch">I build, automate and troubleshoot infrastructure behind real-world applications.</p>
+      <div class="chip-row">
+        <span class="chip"><span class="pulse"></span>Kubernetes</span>
+        <span class="chip"><span class="pulse"></span>Cloud</span>
+        <span class="chip"><span class="pulse"></span>Docker</span>
+        <span class="chip"><span class="pulse"></span>CI/CD</span>
+        <span class="chip"><span class="pulse"></span>Infrastructure</span>
+        <span class="chip"><span class="pulse"></span>Automation</span>
+      </div>
+      <div class="cta-row">
+        <a href="#production" class="btn primary">View production work</a>
+        <a href="https://github.com/arasu97" class="btn" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/thirunavukkarasu-thangavelu" class="btn" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="resume.pdf" class="btn" download>Download CV</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="hero-diagram" aria-label="Diagram: GitHub feeds CI/CD, which builds and deploys to Docker and Kubernetes, both feeding production">
+        <svg viewBox="0 0 260 190" role="img" aria-hidden="true">
+          <rect class="node-box" x="70" y="6" width="120" height="32" rx="3"></rect>
+          <text class="node-text" x="130" y="26" text-anchor="middle">GitHub</text>
+
+          <rect class="node-box" x="70" y="54" width="120" height="32" rx="3"></rect>
+          <text class="node-text" x="130" y="74" text-anchor="middle">CI / CD</text>
+
+          <rect class="node-box" x="10" y="102" width="110" height="32" rx="3"></rect>
+          <text class="node-text" x="65" y="122" text-anchor="middle">Docker</text>
+
+          <rect class="node-box" x="140" y="102" width="110" height="32" rx="3"></rect>
+          <text class="node-text" x="195" y="122" text-anchor="middle">Kubernetes</text>
+
+          <rect class="node-box node-final" x="70" y="150" width="120" height="32" rx="3"></rect>
+          <text class="node-text" x="130" y="170" text-anchor="middle" style="fill:var(--amber);">Production</text>
+
+          <path class="flow-line" d="M130,38 L130,54"></path>
+          <path class="flow-line" d="M130,86 L130,94 L65,94 L65,102"></path>
+          <path class="flow-line" d="M130,86 L130,94 L195,94 L195,102"></path>
+          <path class="flow-line" d="M65,134 L65,142 L130,142 L130,150"></path>
+          <path class="flow-line" d="M195,134 L195,142 L130,142 L130,150"></path>
+        </svg>
+      </div>
+
+      <div class="status-panel">
+        <div class="status-title mono">SYSTEM STATUS</div>
+        <div class="status-caption">static display · not live monitoring</div>
+        <div class="status-row"><span>website</span><span class="val"><span class="pulse"></span>online</span></div>
+        <div class="status-row"><span>portfolio</span><span class="val"><span class="pulse"></span>online</span></div>
+        <div class="status-row"><span>deployment</span><span class="val"><span class="pulse"></span>automated</span></div>
+        <div class="status-row"><span>availability</span><span class="val"><span class="pulse"></span>open to opportunities</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="journey">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">02</span><h2>Engineering journey</h2><div class="section-line"></div></div>
+    <div class="journey reveal" id="journeyLine">
+      <div class="jstep reveal">
+        <div class="yr mono">2017 – 2018</div>
+        <div class="role">Hardware</div>
+        <div class="desc">Started out testing and assembling PCB boards at Versa Drives — hands-on with hardware before moving into IT.</div>
+      </div>
+      <div class="jstep reveal">
+        <div class="yr mono">2019 – 2021</div>
+        <div class="role">Technical Support</div>
+        <div class="desc">Technical representative at Infres Methodex — supporting and troubleshooting office automation hardware and network-connected devices.</div>
+      </div>
+      <div class="jstep reveal">
+        <div class="yr mono">2022 – 2024</div>
+        <div class="role">Networking / Infrastructure</div>
+        <div class="desc">Technical assistant in networks at PSG Groups — built and maintained networks (Wi-Fi, NVRs, DHCP, RADIUS) across 2,000+ systems, and started using Docker for internal apps.</div>
+      </div>
+      <div class="jstep reveal">
+        <div class="yr mono">2024 – Present</div>
+        <div class="role">DevOps</div>
+        <div class="desc">DevOps Engineer at Dataclap Digital Ventures — CI/CD pipelines, containerized deployments, Kubernetes, and multi-cloud infrastructure across AWS, Azure and GCP.</div>
+      </div>
+      <div class="jstep reveal">
+        <div class="yr mono">2026</div>
+        <div class="role">Cloud / Kubernetes / Automation</div>
+        <div class="desc">Deepening Kubernetes and automation work in production.</div>
+      </div>
+      <div class="jstep reveal">
+        <div class="yr mono">Now</div>
+        <div class="role">MLOps exploration</div>
+        <div class="desc">Learning MLOps concepts and building sample pipelines locally, separate from production work.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="build">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">03</span><h2>What I build</h2><div class="section-line"></div></div>
+    <div class="build-grid reveal">
+      <div class="build-card" tabindex="0">
+        <div class="ic">infra</div>
+        <h3>Infrastructure</h3>
+        <p>Server and cloud environments set up and configured for real applications, not just labs.</p>
+        <div class="build-term">
+          <div>$ systemctl status infrastructure</div>
+          <div>● configured</div>
+        </div>
+      </div>
+      <div class="build-card" tabindex="0">
+        <div class="ic">deploy</div>
+        <h3>Deployments</h3>
+        <p>Docker and Kubernetes-based deployment of applications, from first setup to ongoing maintenance.</p>
+        <div class="build-term">
+          <div>$ kubectl rollout status</div>
+          <div>● deployed</div>
+        </div>
+      </div>
+      <div class="build-card" tabindex="0">
+        <div class="ic">automate</div>
+        <h3>Automation</h3>
+        <p>CI/CD pipelines with GitHub Actions and Jenkins that take code from commit to running service.</p>
+        <div class="build-term">
+          <div>$ gh workflow run deploy.yml</div>
+          <div>● automated</div>
+        </div>
+      </div>
+      <div class="build-card" tabindex="0">
+        <div class="ic">debug</div>
+        <h3>Troubleshooting</h3>
+        <p>Diagnosing issues across networking, containers and cloud infrastructure when things break.</p>
+        <div class="build-term">
+          <div>$ docker logs --tail 50</div>
+          <div>● maintained</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="production">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">04</span><h2>Production systems</h2><div class="section-line"></div></div>
+    <p class="section-sub">Infrastructure I've set up, deployed and maintained for real, running systems.</p>
+    <div class="prod-grid reveal">
+      <div class="prod-card">
+        <span class="idx mono">01</span>
+        <h3>Rubricate</h3>
+        <p class="tagline">AI expert-evaluation / training platform</p>
+        <span class="role-tag">Infra + deployment</span>
+        <div class="tag-row"><span class="tag">Docker</span><span class="tag">Kong</span><span class="tag">Cloud server</span></div>
+        <div class="card-links">
+          <a href="https://rubricate.net" target="_blank" rel="noopener">Live site ↗</a>
+          <a href="#case-rubricate">View case study ↓</a>
+        </div>
+      </div>
+      <div class="prod-card">
+        <span class="idx mono">02</span>
+        <h3>CVAT</h3>
+        <p class="tagline">Self-hosted annotation platform for computer-vision work</p>
+        <span class="role-tag">Self-hosting + Docker</span>
+        <div class="tag-row"><span class="tag">Docker</span><span class="tag">CVAT</span></div>
+        <div class="card-links">
+          <a href="https://cvat.usedataclap.com" target="_blank" rel="noopener">Live site ↗</a>
+          <a href="#case-cvat">View case study ↓</a>
+        </div>
+      </div>
+      <div class="prod-card">
+        <span class="idx mono">03</span>
+        <h3>sales.usedataclap.com</h3>
+        <p class="tagline">Application with GitHub-based CI/CD</p>
+        <span class="role-tag">Infra + CI/CD</span>
+        <div class="tag-row"><span class="tag">GitHub Actions</span><span class="tag">Docker</span></div>
+        <div class="card-links">
+          <a href="https://sales.usedataclap.com" target="_blank" rel="noopener">Live site ↗</a>
+          <a href="#case-sales">View case study ↓</a>
+        </div>
+      </div>
+      <div class="prod-card">
+        <span class="idx mono">04</span>
+        <h3>KubeTrace</h3>
+        <p class="tagline">Kubernetes testing / SaaS platform</p>
+        <span class="role-tag">K8s infra support</span>
+        <div class="tag-row"><span class="tag">Kubernetes</span><span class="tag">Cloud</span><span class="tag">Sandbox infra</span></div>
+        <div class="card-links">
+          <a href="https://kubetrace.net" target="_blank" rel="noopener">Live site ↗</a>
+          <a href="#case-kubetrace">View case study ↓</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="case-studies">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">05</span><h2>Case studies</h2><div class="section-line"></div></div>
+
+    <article class="case reveal" id="case-rubricate">
+      <div class="case-head">
+        <div><span class="idx mono">01</span><h3>Rubricate</h3><div class="tagline">AI expert-evaluation / training platform</div></div>
+        <a class="case-link" href="https://rubricate.net" target="_blank" rel="noopener">rubricate.net ↗</a>
+      </div>
+      <div class="case-body">
+        <div>
+          <h4>context</h4>
+          <p>Infrastructure created and supported for Rubricate.</p>
+          <h4>what I worked on</h4>
+          <ul>
+            <li>Infrastructure setup</li>
+            <li>Application deployment</li>
+            <li>Kong API Gateway configuration</li>
+            <li>Routing / gateway configuration</li>
+            <li>Cloud / server infrastructure</li>
+            <li>Troubleshooting and maintenance</li>
+          </ul>
+        </div>
+        <div>
+          <h4>infrastructure / deployment</h4>
+          <div class="flow">
+            <span class="node">Application</span><span class="arrow"></span>
+            <span class="node" tabindex="0" data-tip="API gateway · routing / gateway configuration">Kong API Gateway</span><span class="arrow"></span>
+            <span class="node">Application Services</span>
+          </div>
+          <h4>stack</h4>
+          <div class="tag-row">
+            <span class="tag">Docker</span><span class="tag">Kong</span><span class="tag">Cloud server</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case reveal" id="case-cvat">
+      <div class="case-head">
+        <div><span class="idx mono">02</span><h3>CVAT</h3><div class="tagline">Self-hosted annotation platform</div></div>
+        <a class="case-link" href="https://cvat.usedataclap.com" target="_blank" rel="noopener">cvat.usedataclap.com ↗</a>
+      </div>
+      <div class="case-body">
+        <div>
+          <h4>context</h4>
+          <p>Self-hosted CVAT environment for annotation work.</p>
+          <h4>what I worked on</h4>
+          <ul>
+            <li>Self-hosting CVAT</li>
+            <li>Infrastructure setup</li>
+            <li>Docker-based deployment</li>
+            <li>Configuration</li>
+            <li>Maintenance</li>
+            <li>Annotation workflow support</li>
+          </ul>
+        </div>
+        <div>
+          <h4>infrastructure / deployment</h4>
+          <div class="flow">
+            <span class="node">Cloud / Server</span><span class="arrow"></span>
+            <span class="node" tabindex="0" data-tip="Containerization">Docker</span><span class="arrow"></span>
+            <span class="node">CVAT</span><span class="arrow"></span>
+            <span class="node">Annotation</span>
+          </div>
+          <h4>stack</h4>
+          <div class="tag-row"><span class="tag">Docker</span><span class="tag">CVAT</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case reveal" id="case-sales">
+      <div class="case-head">
+        <div><span class="idx mono">03</span><h3>sales.usedataclap.com</h3><div class="tagline">Application with GitHub-based CI/CD</div></div>
+        <a class="case-link" href="https://sales.usedataclap.com" target="_blank" rel="noopener">sales.usedataclap.com ↗</a>
+      </div>
+      <div class="case-body">
+        <div>
+          <h4>context</h4>
+          <p>Infrastructure setup with GitHub-based CI/CD.</p>
+          <h4>what I worked on</h4>
+          <ul>
+            <li>Infrastructure setup</li>
+            <li>GitHub-based CI/CD</li>
+            <li>Deployment automation</li>
+            <li>Application deployment</li>
+          </ul>
+        </div>
+        <div>
+          <h4>infrastructure / deployment</h4>
+          <div class="flow">
+            <span class="node">Developer</span><span class="arrow"></span>
+            <span class="node">GitHub</span><span class="arrow"></span>
+            <span class="node" tabindex="0" data-tip="CI/CD automation">GitHub Actions</span><span class="arrow"></span>
+            <span class="node">Build / Deploy</span><span class="arrow"></span>
+            <span class="node">Infrastructure</span><span class="arrow"></span>
+            <span class="node">sales.usedataclap.com</span>
+          </div>
+          <h4>stack</h4>
+          <div class="tag-row"><span class="tag">GitHub Actions</span><span class="tag">Docker</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case reveal" id="case-kubetrace">
+      <div class="case-head">
+        <div><span class="idx mono">04</span><h3>KubeTrace</h3><div class="tagline">Kubernetes testing / SaaS platform</div></div>
+        <a class="case-link" href="https://kubetrace.net" target="_blank" rel="noopener">kubetrace.net ↗</a>
+      </div>
+      <div class="case-body">
+        <div>
+          <h4>context</h4>
+          <p>Major SaaS Kubernetes testing platform. I support its infrastructure — I did not build or own the entire platform.</p>
+          <h4>my role</h4>
+          <p>DevOps / Infrastructure Support</p>
+          <h4>what I worked on</h4>
+          <ul>
+            <li>SaaS infrastructure support</li>
+            <li>Kubernetes deployments</li>
+            <li>Kubernetes troubleshooting</li>
+            <li>Sandbox infrastructure support</li>
+            <li>Development / testing environment support</li>
+            <li>Cloud / Kubernetes environments</li>
+          </ul>
+        </div>
+        <div>
+          <h4>infrastructure / deployment</h4>
+          <div class="flow">
+            <span class="node">Cloud</span><span class="arrow"></span>
+            <span class="node" tabindex="0" data-tip="Container orchestration · infrastructure support">Kubernetes</span><span class="arrow"></span>
+            <span class="node">Sandbox Infrastructure</span><span class="arrow"></span>
+            <span class="node">KubeTrace</span>
+          </div>
+          <h4>stack</h4>
+          <div class="tag-row"><span class="tag">Kubernetes</span><span class="tag">Cloud</span><span class="tag">Docker</span></div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="toolbox">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">06</span><h2>Toolbox</h2><div class="section-line"></div></div>
+    <div class="tool-grid reveal">
+      <div class="tool-card">
+        <h3>cloud</h3>
+        <div class="tag-row"><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">GCP</span><span class="tag">Vultr</span><span class="tag">Hetzner</span><span class="tag">Contabo</span></div>
+      </div>
+      <div class="tool-card">
+        <h3>containers</h3>
+        <div class="tag-row"><span class="tag">Docker</span><span class="tag">Kubernetes</span></div>
+      </div>
+      <div class="tool-card">
+        <h3>ci/cd</h3>
+        <div class="tag-row"><span class="tag">GitHub Actions</span><span class="tag">Jenkins</span></div>
+      </div>
+      <div class="tool-card">
+        <h3>automation</h3>
+        <div class="tag-row"><span class="tag">Ansible</span><span class="tag">Terraform</span></div>
+      </div>
+      <div class="tool-card">
+        <h3>networking / proxy</h3>
+        <div class="tag-row"><span class="tag">Nginx</span><span class="tag">Kong</span><span class="tag">DHCP / RADIUS</span></div>
+      </div>
+      <div class="tool-card">
+        <h3>version control</h3>
+        <div class="tag-row"><span class="tag">Git</span><span class="tag">GitHub</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="learning">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">07</span><h2>Currently exploring</h2><div class="section-line"></div></div>
+    <p class="split-label">production experience vs. active learning — kept separate on purpose</p>
+    <div class="learn-box reveal">
+      <span class="learn-badge">LEARNING / PRACTICE · NOT PRODUCTION EXPERIENCE</span>
+      <h3>MLOps</h3>
+      <p>Currently experimenting with MLOps workflows locally through sample projects, including an image-captioning pipeline, to understand the complete workflow from data preparation and pipelines through model training, serving and monitoring.</p>
+      <div class="mlops-flow">
+        <span class="node">Data</span><span class="arrow"></span>
+        <span class="node">Processing</span><span class="arrow"></span>
+        <span class="node">Training</span><span class="arrow"></span>
+        <span class="node">Model</span><span class="arrow"></span>
+        <span class="node">Serving</span><span class="arrow"></span>
+        <span class="node">Monitoring</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <p class="kicker mono">$ echo "ready to build something reliable"</p>
+    <h2>Ready to build something reliable?</h2>
+    <p class="sub">I'm open to DevOps, Cloud and Infrastructure opportunities.</p>
+    <div class="contact-links">
+      <a href="mailto:arasu52828@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/thirunavukkarasu-thangavelu" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/arasu97" target="_blank" rel="noopener">GitHub</a>
+      <a href="resume.pdf" download>Download CV</a>
+    </div>
+    <div class="foot-note">Coimbatore, Tamil Nadu, India · thirunavukkarasu.in</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // mobile nav toggle
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  var navAnchors = Array.prototype.slice.call(links.querySelectorAll('a'));
+  navAnchors.forEach(function(a){
+    a.addEventListener('click', function(){ links.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+  });
+
+  // hero typing effect
+  var el = document.getElementById('typedLine');
+  var text = '$ whoami';
+  if(reduced){
+    el.textContent = text;
+  } else {
+    var i = 0;
+    function type(){
+      el.textContent = text.slice(0,i);
+      var caret = document.createElement('span');
+      caret.className = 'caret';
+      el.appendChild(caret);
+      if(i < text.length){ i++; setTimeout(type, 65); }
+    }
+    type();
+  }
+
+  // scroll reveal
+  var revealTargets = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var revealObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in-view'); revealObs.unobserve(e.target); }
+      });
+    }, {threshold:0.12});
+    revealTargets.forEach(function(t){ revealObs.observe(t); });
+  } else {
+    revealTargets.forEach(function(t){ t.classList.add('in-view'); });
+  }
+
+  // journey step activation (line fill + node highlight)
+  var jsteps = document.querySelectorAll('.jstep');
+  if('IntersectionObserver' in window){
+    var jObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in-view'); }
+      });
+    }, {threshold:0.5});
+    jsteps.forEach(function(s){ jObs.observe(s); });
+  } else {
+    jsteps.forEach(function(s){ s.classList.add('in-view'); });
+  }
+
+  // active nav highlighting
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main section, main header'));
+  if('IntersectionObserver' in window){
+    var navObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var id = e.target.id;
+          navAnchors.forEach(function(a){
+            a.classList.toggle('active', a.getAttribute('data-section') === id);
+          });
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+    sections.forEach(function(s){ navObs.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>
